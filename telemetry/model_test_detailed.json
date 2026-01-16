@@ -1,0 +1,325 @@
+[
+  {
+    "model": "openai/gpt-oss-20b:free",
+    "provider": "openai",
+    "results": {
+      "basic": false
+    },
+    "errors": {
+      "basic": "Error code: 404 - {'error': {'message': 'No endpoints found matching your data policy (Free model publication). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}"
+    }
+  },
+  {
+    "model": "moonshotai/kimi-k2:free",
+    "provider": "moonshotai",
+    "results": {
+      "basic": false
+    },
+    "errors": {
+      "basic": "Error code: 404 - {'error': {'message': 'No endpoints found matching your data policy (Free model publication). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}"
+    }
+  },
+  {
+    "model": "meta-llama/llama-3.1-405b-instruct:free",
+    "provider": "meta-llama",
+    "results": {
+      "basic": false
+    },
+    "errors": {
+      "basic": "Error code: 404 - {'error': {'message': 'Provider returned error', 'code': 404, 'metadata': {'raw': 'No matching route found. It is likely because the model specified in your request is not configured in the Gateway.', 'provider_name': 'ModelRun', 'is_byok': False}}, 'user_id': 'user_2qZ9PA43ctxR20JWjqA615HNHg0'}"
+    }
+  },
+  {
+    "model": "cognitivecomputations/dolphin-mistral-24b-venice-edition:free",
+    "provider": "cognitivecomputations",
+    "results": {
+      "basic": false
+    },
+    "errors": {
+      "basic": "Error code: 402 - {'error': {'message': 'Provider returned error', 'code': 402, 'metadata': {'raw': '{\"error\":\"API key USD spend limit exceeded. Your account may still have USD balance, but this API key has reached its configured USD spending limit.\"}', 'provider_name': 'Venice', 'is_byok': False}}, 'user_id': 'user_2qZ9PA43ctxR20JWjqA615HNHg0'}"
+    }
+  },
+  {
+    "model": "allenai/molmo-2-8b:free",
+    "provider": "allenai",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": true
+    },
+    "errors": {}
+  },
+  {
+    "model": "google/gemma-3n-e2b-it:free",
+    "provider": "google",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": true
+    },
+    "errors": {}
+  },
+  {
+    "model": "arcee-ai/trinity-mini:free",
+    "provider": "arcee-ai",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": false
+    },
+    "errors": {
+      "structured_card": "Missing Front/Back structure"
+    }
+  },
+  {
+    "model": "tngtech/deepseek-r1t2-chimera:free",
+    "provider": "tngtech",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": false
+    },
+    "errors": {
+      "structured_card": "Missing Front/Back structure"
+    }
+  },
+  {
+    "model": "qwen/qwen3-coder:free",
+    "provider": "qwen",
+    "results": {
+      "basic": false
+    },
+    "errors": {
+      "basic": "Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'qwen/qwen3-coder:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Venice', 'is_byok': False}}, 'user_id': 'user_2qZ9PA43ctxR20JWjqA615HNHg0'}"
+    }
+  },
+  {
+    "model": "mistralai/devstral-2512:free",
+    "provider": "mistralai",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": true
+    },
+    "errors": {}
+  },
+  {
+    "model": "google/gemma-3n-e4b-it:free",
+    "provider": "google",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": true
+    },
+    "errors": {}
+  },
+  {
+    "model": "deepseek/deepseek-r1-0528:free",
+    "provider": "deepseek",
+    "results": {
+      "basic": false
+    },
+    "errors": {
+      "basic": "'NoneType' object is not subscriptable"
+    }
+  },
+  {
+    "model": "qwen/qwen3-4b:free",
+    "provider": "qwen",
+    "results": {
+      "basic": false
+    },
+    "errors": {
+      "basic": "Error code: 402 - {'error': {'message': 'Provider returned error', 'code': 402, 'metadata': {'raw': '{\"error\":\"API key USD spend limit exceeded. Your account may still have USD balance, but this API key has reached its configured USD spending limit.\"}', 'provider_name': 'Venice', 'is_byok': False}}, 'user_id': 'user_2qZ9PA43ctxR20JWjqA615HNHg0'}"
+    }
+  },
+  {
+    "model": "xiaomi/mimo-v2-flash:free",
+    "provider": "xiaomi",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": true
+    },
+    "errors": {}
+  },
+  {
+    "model": "nvidia/nemotron-nano-12b-v2-vl:free",
+    "provider": "nvidia",
+    "results": {
+      "basic": true,
+      "long_context": false
+    },
+    "errors": {
+      "long_context": "'NoneType' object is not subscriptable"
+    }
+  },
+  {
+    "model": "mistralai/mistral-small-3.1-24b-instruct:free",
+    "provider": "mistralai",
+    "results": {
+      "basic": false
+    },
+    "errors": {
+      "basic": "Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'mistralai/mistral-small-3.1-24b-instruct:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Venice', 'is_byok': False}}, 'user_id': 'user_2qZ9PA43ctxR20JWjqA615HNHg0'}"
+    }
+  },
+  {
+    "model": "tngtech/deepseek-r1t-chimera:free",
+    "provider": "tngtech",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": false
+    },
+    "errors": {
+      "structured_card": "Missing Front/Back structure"
+    }
+  },
+  {
+    "model": "google/gemma-3-4b-it:free",
+    "provider": "google",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": true
+    },
+    "errors": {}
+  },
+  {
+    "model": "nvidia/nemotron-3-nano-30b-a3b:free",
+    "provider": "nvidia",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": true
+    },
+    "errors": {}
+  },
+  {
+    "model": "tngtech/tng-r1t-chimera:free",
+    "provider": "tngtech",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": false
+    },
+    "errors": {
+      "structured_card": "Missing Front/Back structure"
+    }
+  },
+  {
+    "model": "google/gemma-3-12b-it:free",
+    "provider": "google",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": true
+    },
+    "errors": {}
+  },
+  {
+    "model": "qwen/qwen3-next-80b-a3b-instruct:free",
+    "provider": "qwen",
+    "results": {
+      "basic": false
+    },
+    "errors": {
+      "basic": "Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'qwen/qwen3-next-80b-a3b-instruct:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Venice', 'is_byok': False}}, 'user_id': 'user_2qZ9PA43ctxR20JWjqA615HNHg0'}"
+    }
+  },
+  {
+    "model": "google/gemma-3-27b-it:free",
+    "provider": "google",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": true
+    },
+    "errors": {}
+  },
+  {
+    "model": "google/gemini-2.0-flash-exp:free",
+    "provider": "google",
+    "results": {
+      "basic": false
+    },
+    "errors": {
+      "basic": "Error code: 500 - {'error': {'message': 'Internal Server Error', 'code': 500}}"
+    }
+  },
+  {
+    "model": "nvidia/nemotron-nano-9b-v2:free",
+    "provider": "nvidia",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": false
+    },
+    "errors": {
+      "structured_card": "Missing Front/Back structure"
+    }
+  },
+  {
+    "model": "meta-llama/llama-3.2-3b-instruct:free",
+    "provider": "meta-llama",
+    "results": {
+      "basic": false
+    },
+    "errors": {
+      "basic": "Error code: 429 - {'error': {'message': 'Rate limit exceeded: free-models-per-min. ', 'code': 429, 'metadata': {'headers': {'X-RateLimit-Limit': '20', 'X-RateLimit-Remaining': '0', 'X-RateLimit-Reset': '1768594500000'}, 'provider_name': None}}, 'user_id': 'user_2qZ9PA43ctxR20JWjqA615HNHg0'}"
+    }
+  },
+  {
+    "model": "openai/gpt-oss-120b:free",
+    "provider": "openai",
+    "results": {
+      "basic": false
+    },
+    "errors": {
+      "basic": "Error code: 404 - {'error': {'message': 'No endpoints found matching your data policy (Free model publication). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}"
+    }
+  },
+  {
+    "model": "meta-llama/llama-3.3-70b-instruct:free",
+    "provider": "meta-llama",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": true
+    },
+    "errors": {}
+  },
+  {
+    "model": "qwen/qwen-2.5-vl-7b-instruct:free",
+    "provider": "qwen",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": true
+    },
+    "errors": {}
+  },
+  {
+    "model": "nousresearch/hermes-3-llama-3.1-405b:free",
+    "provider": "nousresearch",
+    "results": {
+      "basic": false
+    },
+    "errors": {
+      "basic": "Error code: 402 - {'error': {'message': 'Provider returned error', 'code': 402, 'metadata': {'raw': '{\"error\":\"API key USD spend limit exceeded. Your account may still have USD balance, but this API key has reached its configured USD spending limit.\"}', 'provider_name': 'Venice', 'is_byok': False}}, 'user_id': 'user_2qZ9PA43ctxR20JWjqA615HNHg0'}"
+    }
+  },
+  {
+    "model": "z-ai/glm-4.5-air:free",
+    "provider": "z-ai",
+    "results": {
+      "basic": true,
+      "long_context": true,
+      "structured_card": false
+    },
+    "errors": {
+      "structured_card": "Missing Front/Back structure"
+    }
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "allenai": [
+    "allenai/molmo-2-8b:free"
+  ],
+  "google": [
+    "google/gemma-3n-e2b-it:free",
+    "google/gemma-3n-e4b-it:free",
+    "google/gemma-3-4b-it:free",
+    "google/gemma-3-12b-it:free",
+    "google/gemma-3-27b-it:free"
+  ],
+  "mistralai": [
+    "mistralai/devstral-2512:free"
+  ],
+  "xiaomi": [
+    "xiaomi/mimo-v2-flash:free"
+  ],
+  "nvidia": [
+    "nvidia/nemotron-3-nano-30b-a3b:free"
+  ],
+  "meta-llama": [
+    "meta-llama/llama-3.3-70b-instruct:free"
+  ],
+  "qwen": [
+    "qwen/qwen-2.5-vl-7b-instruct:free"
+  ]
+}
