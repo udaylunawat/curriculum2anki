@@ -55,7 +55,7 @@ If a card is generated, it is:
 **Silence is preferred over noise.**
 
 ## Sample Card
-![alt text](sample.jpeg)
+![alt text](image.png)
 
 ---
 
