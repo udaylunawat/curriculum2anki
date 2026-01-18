@@ -27,7 +27,7 @@ Most “AI flashcard” tools fail in predictable ways:
 
 Curriculum2Anki was built to solve those problems *systematically*.
 
-In one overnight run, it generated **900+ ultra high-quality cards from a ~100k token document for ~$0.20**, using **Gemini 2.5 Flash (Thinking)** via OpenRouter.
+In one 5 min run, it generated **900+ ultra high-quality cards from a ~100k token document for ~$0.20**, using **Gemini 2.5 Flash (Thinking)** via OpenRouter.
 
 ---
 
