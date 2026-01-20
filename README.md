@@ -1,150 +1,157 @@
-
 # Curriculum2Anki
 
-**A Knowledge Distillation Engine for Turning Long-Form Text into High-Signal Anki Decks**
+A production-grade knowledge distillation pipeline for converting long-form technical content into high-signal Anki decks.
 
-Curriculum2Anki is a production-grade pipeline that converts **large, unstructured or semi-structured text documents** (courses, books, notes, PDFs converted to markdown) into **high-quality Anki flashcards** using LLMs.
+Curriculum2Anki converts large, messy, real-world documents into review-efficient Anki flashcards using LLMs, while enforcing strict quality, structure, and recall constraints.
 
-It is designed around one principle:
+> **This is not a flashcard generator.**
+> **It is a knowledge distillation system.**
 
-> **If a card cannot be recalled confidently in under 10 seconds, it does not belong.**
+If a card cannot be confidently recalled in under 10 seconds, it does not belong.
 
-This is not a toy flashcard generator.
-It is a **knowledge distillation system** built to survive messy input, unreliable models, long documents (100k+ tokens), and real-world constraints like rate limits, interruptions, and cost ceilings.
+## What problem this actually solves
 
----
+Most AI flashcard tools fail in predictable ways:
 
-## Why this exists
+- Over-generate low-signal cards
+- Ignore curriculum structure
+- Hallucinate relationships
+- Break math rendering
+- Cannot resume after failure
+- Provide zero observability
+- Corrupt decks silently
 
-Most “AI flashcard” tools fail in predictable ways:
+Curriculum2Anki was built by repeatedly hitting these failures and eliminating them systematically, not by prompt tweaking.
 
-* Over-generate low-signal cards
-* Lose curriculum or document structure
-* Hallucinate relationships
-* Break math rendering
-* Cannot resume after failure
-* Offer no observability or quality gates
+In one real run, it produced 900+ reviewable cards from a ~100k token document for ~$0.20, using free and low-cost OpenRouter models.
 
-Curriculum2Anki was built to solve those problems *systematically*.
+## What this system does
 
-In one 5 min run, it generated **900+ ultra high-quality cards from a ~100k token document for ~$0.20**, using **Gemini 2.5 Flash (Thinking)** via OpenRouter.
+Converts long markdown documents into Anki-importable CSV decks.
 
----
+**Designed for:**
+- Course notes
+- Technical books
+- Interview prep material
+- Research summaries
 
-## What this does
+**Enforces hard card quality gates:**
+- Aligns cards to curriculum structure, not brittle numbering
+- Uses free or low-cost LLMs with automatic fallback
+- Supports resume-after-interruption
+- Produces deterministic, review-ready output
 
-* Converts **long text documents** into Anki-importable CSV decks
-* Works with:
-    * Course notes
-    * Technical books
-    * Interview prep material
-    * Research summaries
-    * Any markdown-converted text
-* Enforces **strict card quality rules**
-* Aligns cards to **semantic structure**, not brittle numbering
-* Uses **free / low-cost LLMs** with automatic fallback
-* Supports **resume-after-interruption** at batch level
-* Produces **deterministic, review-ready output**
+**If a card is generated, it is:**
+- Atomic
+- Self-contained
+- Strictly formatted
+- LaTeX-validated
+- Worth reviewing
 
-If a card is generated, it is:
-* Self-contained
-* Strictly formatted
-* Validated for LaTeX and structure
-* Worth reviewing
+Silence is preferred over noise.
 
-**Silence is preferred over noise.**
-
-## Sample Card
+## Sample card
 ![alt text](image.png)
 
----
 
-## Core design ideas
+## Core design principles
 
 ### 1. Knowledge distillation, not summarization
-The system extracts **concepts**, then distills them into **atomic recall units**. Coverage is deliberately capped. Precision is prioritized.
+The pipeline extracts concepts first, then distills them into atomic recall units.
+Coverage is capped deliberately. Precision wins.
 
-### 2. Defensive parsing
-Input documents are assumed to be inconsistent, poorly structured, and noisy.
+### 2. Defensive parsing by default
+Input documents are assumed to be:
+- Inconsistently structured
+- Poorly formatted
+- Noisy
+- Partially broken
 
-The pipeline:
-* Ignores formatting noise
-* Uses robust header detection
-* Falls back to semantic matching
-* Refuses to guess when alignment is ambiguous
+The system therefore:
+- Uses header-based chunking with fallbacks
+- Ignores formatting noise
+- Falls back to semantic matching
+- Refuses to guess when alignment is ambiguous
 
-### 3. Curriculum / structure as source of truth
-A lightweight CSV acts as the **authoritative schema** (Module, Chapter, Concept titles). Document structure is *mapped* to this schema, not trusted blindly.
+This reduced hallucinations more than any prompt change.
 
-This makes the system portable across courses, books, internal documentation, and knowledge bases.
+### 3. Curriculum as source of truth
+A lightweight CSV (`curriculum_extracted.csv`) acts as the authoritative schema:
+- Module
+- Chapter
+- Lecture titles
+
+Document structure is mapped to this schema, never trusted blindly.
+**If alignment fails, generation stops.**
+
+This makes the pipeline portable across courses, books, and internal knowledge bases.
 
 ### 4. Quality gates are non-negotiable
-Cards are dropped if they fail checks such as:
-* Front length > 12 words
-* Missing ELI5 explanation
-* Broken or unbalanced LaTeX
-* Duplicate concepts
-* Explanation without substance
+Bad cards permanently damage an Anki deck. Cards are dropped if they fail checks such as:
+- Front longer than 12 words
+- Missing mandatory ELI5 explanation
+- Broken or unbalanced LaTeX
+- Duplicate or overlapping concepts
+- Explanation without substance
+- Length violations
 
-Bad cards permanently damage decks. The system prefers to generate nothing rather than generate garbage.
+The system prefers generating nothing over generating garbage.
 
 ### 5. Observability and resumability
-* Batch-level progress tracking
-* Per-chapter progress bars and ETA
-* Model success/failure logging
-* Resume state persisted to disk
-* Append-only CSV output
+This is built for long-running jobs, not demos.
 
-This is built for **long-running jobs**, not demos.
+- Batch-level progress tracking
+- Per-chapter progress and ETA
+- Model success and failure telemetry
+- Resume state persisted to disk
+- Append-only CSV output
 
----
+If the process crashes, rerun it. **Nothing is lost.**
 
 ## Directory structure
 
 ```text
-flashcards/
-├── README.md                  This document
-├── STORY.md                   Design history and evolution
-├── curriculum_extracted.csv   Document / curriculum schema
-├── markdowns/                 Input text (markdown)
-├── output/                    Generated decks + resume state
-├── prompts/                   Versioned LLM prompts
-├── validators/                Hard quality gates
-├── telemetry/                 Model probing and health stats
+.
+├── README.md                    This document
+├── STORY.md                     Design history and evolution
+├── curriculum_extracted.csv     Curriculum schema (source of truth)
+├── markdowns/                   Input markdown documents
+├── output/                      Generated decks and resume state
+├── prompts/                     Versioned LLM prompts
+├── validators/                  Hard quality gates
+├── telemetry/                   Model probing and health stats
 ├── docs/
-│   └── DECK_STANDARD.md       Deck invariants and rules
-├── main.py                    Stable production pipeline
-├── main1.py … main8.py        Evolutionary stages
-└── test.py                    Free-model probing harness
+│   └── AAIC_DECK_STANDARD.md    Deck invariants and rules
+├── main.py                      Stable production pipeline
+├── archived/                    Historical pipeline iterations
+└── get_free_models.py           Free-model probing and validation
 
 ```
 
----
-
 ## How to run
 
-### 1. Install dependencies
+**1. Install dependencies**
 
 ```bash
 pip install -r requirements.txt
 
 ```
 
-### 2. Set API key
+**2. Set API key**
 
 ```bash
 export OPENROUTER_API_KEY=your_key
 
 ```
 
-### 3. Run on all documents
+**3. Run on all markdown files**
 
 ```bash
 python main.py
 
 ```
 
-### 4. Run on a single document
+**4. Run on a single document**
 
 ```bash
 python main.py --file markdowns/your_doc.md
@@ -153,23 +160,21 @@ python main.py --file markdowns/your_doc.md
 
 ### Resume after interruption
 
-Just rerun the same command. Progress is restored automatically.
+Just rerun the same command.
+Progress is restored automatically from disk.
 
-> Generated CSVs appear in `output/` and can be imported directly into Anki.
+Generated CSVs appear in `output/` and can be imported directly into Anki.
 
----
+## Model strategy
 
-## Models
+* Designed for free and low-cost OpenRouter models
+* Models are actively probed via `get_free_models.py`
+* Only verified, structured-output-capable models are used
+* Provider and model failures are treated as expected behavior
 
-* Designed to work with free and low-cost models
-* Actively tested and rotated via `test.py`
-* Current best results observed with: **Gemini 2.5 Flash (Thinking)**
+Model unreliability is a constraint, not an exception.
 
-Model unreliability is treated as a given, not an exception.
-
----
-
-## What makes this production-grade
+## Why this is production-grade
 
 * Rate-limit aware
 * Provider-aware fallback
@@ -180,39 +185,36 @@ Model unreliability is treated as a given, not an exception.
 * Explicit failure modes
 * No silent corruption
 
-This codebase reflects real failure conditions, not ideal ones.
-
----
+This code reflects real failure conditions, not ideal ones.
 
 ## How this generalizes beyond courses
 
-Curriculum2Anki is intentionally not domain-specific. With minimal changes, it can power:
+The core abstraction is:
+`Text → Concepts → Validated Recall Units`
 
-* Book-to-Anki pipelines
+With minimal changes, this pipeline can power:
+
+* Book-to-Anki systems
 * Internal knowledge base distillation
 * Interview prep generators
 * Onboarding documentation agents
 * Personal knowledge graphs
 
-The core abstraction is: **Text → Concepts → Validated Recall Units**
-
----
+It is domain-agnostic by design.
 
 ## How this maps to real-world AI systems
 
-This project touches multiple production-level concerns relevant to modern AI tooling:
+This project exercises multiple production-level AI concerns:
 
-* Information retrieval and matching
 * Long-context handling
 * Cost-aware LLM orchestration
-* Agent-like task decomposition
 * Reliability under partial failure
+* Agent-like task decomposition
 * Deterministic post-processing
-* Human-in-the-loop quality enforcement
+* Human-quality enforcement via hard gates
 
-It is closer to a workflow automation engine using LLM agents than a simple NLP script.
-
----
+The LLM calls are not the hard part.
+Everything around them is.
 
 ## Philosophy
 
@@ -221,22 +223,20 @@ It is closer to a workflow automation engine using LLM agents than a simple NLP 
 * Prefer correctness to coverage
 * Prefer systems that explain themselves
 
+**Rules the system enforces:**
+
 1. If a card is hard to review, delete it.
 2. If alignment is unclear, stop.
 3. If a model misbehaves, route around it.
-
----
 
 ## Status
 
 * Actively evolving
 * Built rapidly, but deliberately
-* Designed to be extended into a SaaS or internal tool
-* Optimized for correctness, cost, and recall efficiency
+* Designed to scale into internal tooling or SaaS
+* Optimized for recall efficiency, correctness, and cost
 
-> **If you’re reading this as a reviewer or interviewer:**
-> This repository was built to demonstrate systems thinking around AI agents and tooling, not just prompt engineering.
-> The hard parts here are not the LLM calls.
-> They are everything around them.
+**If you are reading this as a reviewer or interviewer:**
 
-```
+This repository exists to demonstrate systems thinking around LLM-powered pipelines, not prompt engineering tricks.
+The value is in the constraints, the failure handling, and the refusal to generate garbage.
