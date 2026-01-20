@@ -23,7 +23,8 @@ Most AI flashcard tools fail in predictable ways:
 
 Curriculum2Anki was built by repeatedly hitting these failures and eliminating them systematically, not by prompt tweaking.
 
-In one real run, it produced 900+ reviewable cards from a ~100k token document for ~$0.20, using free and low-cost OpenRouter models.
+In one real run, it produced 900+ reviewable cards from a ~100k token document for ~$0.20, using Gemini 2.5 flash lite model.
+It also supports only using free models from Openrouter.
 
 ## What this system does
 
